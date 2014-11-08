@@ -57,6 +57,10 @@ die() {
   exit 1
 }
 
+checksu() {
+  sudo -v || exit 1
+}
+
 sigint() {
   _sigint() {
     die killed
