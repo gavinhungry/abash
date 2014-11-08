@@ -3,6 +3,12 @@ abash
 Small functions for bash shell scripts.
 
 
+Usage
+-----
+
+    [ ${_ABASH:-0} -ne 0 ] || source $(dirname "${BASH_SOURCE}")/abash/abash.sh
+
+
 License
 -------
 Released under the terms of the
