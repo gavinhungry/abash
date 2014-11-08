@@ -27,10 +27,16 @@ msg() {
   local FG=34
   local BG=70
 
-  [ "$1" = "-w" ] && shift && FG=33
-  [ "$1" = "-e" ] && shift && FG=31
+  [ "$1" = "-e" ] && shift && FG=31 # red
+  [ "$1" = "-i" ] && shift && FG=32 # green
+  [ "$1" = "-w" ] && shift && FG=33 # yellow
 
   print 1 $FG $BG "$(basename $0)" ": $@"
+}
+
+inform() {
+  echo
+  msg -i "$@ ..."
 }
 
 err() {
