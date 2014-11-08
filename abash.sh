@@ -63,3 +63,5 @@ sigint() {
 
   trap _sigint SIGINT
 }
+
+_ABASH=1
