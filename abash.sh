@@ -59,6 +59,7 @@ die() {
 
 checksu() {
   sudo -v || exit 1
+  [ $# -gt 0 ] && sudo "$@"
 }
 
 sigint() {
