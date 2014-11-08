@@ -58,7 +58,7 @@ die() {
 }
 
 checksu() {
-  sudo -v
+  sudo -v || exit 1
 }
 
 sigint() {
