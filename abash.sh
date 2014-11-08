@@ -5,11 +5,6 @@
 # Desc: Small functions for bash shell scripts
 #
 
-if [ $BASH_SOURCE = $0 ]; then
-  echo "$(basename $BASH_SOURCE) must be sourced" >&2
-  exit 1
-fi
-
 usage() {
   echo -e "\033[1musage\033[0m: $(basename $0) $@"
   exit 1
