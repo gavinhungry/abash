@@ -35,7 +35,6 @@ msg() {
 }
 
 inform() {
-  echo
   msg -i "$@ ..."
 }
 
