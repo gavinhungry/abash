@@ -2,7 +2,6 @@ abash
 =====
 Small functions for bash shell scripts.
 
-
 Usage
 -----
 
