@@ -14,6 +14,17 @@ pref() {
   [ ${!1:-0} -eq 1 ] && return
 }
 
+arg() {
+  [ ${#1} -eq 1 ] && COMP="-$1" || COMP="--$1"
+
+  for (( I=${BASH_ARGC}; I>=0; I-- )); do
+    if [ "${BASH_ARGV[$I]}" == "${COMP}" ]; then
+      echo ${BASH_ARGV[$I-1]}
+      break
+    fi
+  done
+}
+
 print() {
   local ATTR=$1; shift
   local FG=$1; shift
