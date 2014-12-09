@@ -15,10 +15,19 @@ pref() {
 }
 
 arg() {
+  [ $# -ne 1 ] && return
+
+  LONG=$(echo $1 | cut -d: -f1)
+  SHORT=$(echo $1 | cut -sd: -f2)
+
+  LONG_ARG="--${LONG}"
+  SHORT_ARG="-${SHORT:-${LONG:0:1}}"
+
   [ ${#1} -eq 1 ] && COMP="-$1" || COMP="--$1"
 
-  for (( I=${BASH_ARGC}; I>=0; I-- )); do
-    if [ "${BASH_ARGV[$I]}" == "${COMP}" ]; then
+  for (( I=0; I<=${BASH_ARGC}; I++ )); do
+    if [ "${BASH_ARGV[$I]}" == "${LONG_ARG}" -o \
+         "${BASH_ARGV[$I]}" == "${SHORT_ARG}" ]; then
       echo ${BASH_ARGV[$I-1]}
       break
     fi
