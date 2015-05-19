@@ -25,13 +25,20 @@ arg() {
 
   [ ${#1} -eq 1 ] && COMP="-$1" || COMP="--$1"
 
-  for (( I=0; I<=${BASH_ARGC}; I++ )); do
+  for (( I=0; I<=${BASH_ARGC:-0}; I++ )); do
     if [ "${BASH_ARGV[$I]}" == "${LONG_ARG}" -o \
          "${BASH_ARGV[$I]}" == "${SHORT_ARG}" ]; then
       echo ${BASH_ARGV[$I-1]}
+      return 0
       break
     fi
   done
+
+  return 1
+}
+
+arge() {
+  arg $1 &> /dev/null
 }
 
 print() {
