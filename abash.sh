@@ -15,10 +15,11 @@ pref() {
 }
 
 arg() {
-  [ $# -ne 1 ] && return
+  [ $# -ne 1 -a $# -ne 2 ] && return
 
   LONG=$(echo $1 | cut -d: -f1)
   SHORT=$(echo $1 | cut -sd: -f2)
+  DEFAULT=$2
 
   LONG_ARG="--${LONG}"
   SHORT_ARG="-${SHORT:-${LONG:0:1}}"
@@ -33,6 +34,11 @@ arg() {
       break
     fi
   done
+
+  if [ -n "${DEFAULT}" ]; then
+    echo ${DEFAULT}
+    return 0
+  fi
 
   return 1
 }
