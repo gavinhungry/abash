@@ -51,9 +51,9 @@ print() {
   local ATTR=$1; shift
   local FG=$1; shift
   local BG=$1; shift
-  local BANNER=$@; shift
+  local BANNER=$1; shift
 
-  echo -e "\e[${ATTR};${FG};${BG}m${BANNER}\e[0m"
+  echo -e "\e[${ATTR};${FG};${BG}m${BANNER}\e[0m$@"
 }
 
 msg() {
