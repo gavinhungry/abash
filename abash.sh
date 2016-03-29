@@ -47,6 +47,14 @@ arge() {
   arg $1 &> /dev/null
 }
 
+quietly() {
+  if arg verbose; then
+    eval "$@"
+  else
+    eval "$@" &> /dev/null
+  fi
+}
+
 print() {
   local ATTR=$1; shift
   local FG=$1; shift
