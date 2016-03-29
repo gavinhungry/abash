@@ -48,7 +48,7 @@ arge() {
 }
 
 quietly() {
-  if arg verbose; then
+  if arge verbose; then
     eval "$@"
   else
     eval "$@" &> /dev/null
