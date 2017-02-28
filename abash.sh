@@ -115,4 +115,11 @@ sigint() {
   trap _sigint SIGINT
 }
 
+confirm() {
+  read -p "$1 [Y/n] " CONFIRM
+  echo
+
+  [ "$CONFIRM" == "Y" -o "$CONFIRM" == "Yes" -o -z "$CONFIRM" ] || exit 1
+}
+
 _ABASH=1
