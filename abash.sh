@@ -60,6 +60,13 @@ fnfarg() {
   echo ${NFARGS[0]}
 }
 
+tmpdirp() {
+  local TMP="${TMPDIR:-/tmp}/$(basename $0)-$(whoami)/${1:-tmp}"
+
+  mkdir -p $TMP
+  echo $TMP
+}
+
 tmpdir() {
   local TMP="${TMPDIR:-/tmp}/$(basename $0)-$(whoami)-$$/${1:-tmp}-${RANDOM}"
 
@@ -68,7 +75,7 @@ tmpdir() {
 }
 
 tmpdirclean() {
-  rm -fr "${TMPDIR:-/tmp}/$(basename $0)-$(whoami)-$$"
+  rm -fr "${TMPDIR:-/tmp}/$(basename $0)-$(whoami)"{,-$$}
 }
 
 quietly() {
