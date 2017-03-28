@@ -17,12 +17,12 @@ pref() {
 arg() {
   [ $# -ne 1 -a $# -ne 2 ] && return
 
-  LONG=$(echo $1 | cut -d: -f1)
-  SHORT=$(echo $1 | cut -sd: -f2)
-  DEFAULT=$2
+  local LONG=$(echo $1 | cut -d: -f1)
+  local SHORT=$(echo $1 | cut -sd: -f2)
+  local DEFAULT=$2
 
-  LONG_ARG="--${LONG}"
-  SHORT_ARG="-${SHORT:-${LONG:0:1}}"
+  local LONG_ARG="--${LONG}"
+  local SHORT_ARG="-${SHORT:-${LONG:0:1}}"
 
   [ ${#1} -eq 1 ] && COMP="-$1" || COMP="--$1"
 
@@ -93,7 +93,7 @@ banner() {
 }
 
 bannerline() {
-  ARGS=$@
+  local ARGS=$@
   banner "${ARGS}$(printf '%*s' $((${COLUMNS:-$(tput cols)} - ${#ARGS})) '')"
 }
 
