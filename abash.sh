@@ -5,6 +5,8 @@
 # Desc: Small functions for bash shell scripts
 #
 
+_ABASH=1
+
 usage() {
   echo -e "\033[1musage\033[0m: $(basename $0) $@"
   exit 1
@@ -45,6 +47,28 @@ arg() {
 
 arge() {
   arg $1 &> /dev/null
+}
+
+nfargs() {
+  for (( I=$BASH_ARGC-1; I>=0; I-- )); do
+    [[ ${BASH_ARGV[$I]} != -* ]] && echo ${BASH_ARGV[$I]}
+  done
+}
+
+fnfarg() {
+  NFARGS=($(nfargs))
+  echo ${NFARGS[0]}
+}
+
+tmpdir() {
+  local TMP="${TMPDIR:-/tmp}/$(basename $0)-$(whoami)-$$/${1:-tmp}-${RANDOM}"
+
+  mkdir -p $TMP
+  echo $TMP
+}
+
+tmpdirclean() {
+  rm -fr "${TMPDIR:-/tmp}/$(basename $0)-$(whoami)-$$"
 }
 
 quietly() {
@@ -115,11 +139,17 @@ sigint() {
   trap _sigint SIGINT
 }
 
+isint() {
+  [ "$1" -eq "$1" ] &> /dev/null
+}
+
+pidpid() {
+  isint $1 && echo $1 || pidof -s $1 2> /dev/null
+}
+
 confirm() {
   read -p "$1 [Y/n] " CONFIRM
   echo
 
   [ "$CONFIRM" == "Y" -o "$CONFIRM" == "Yes" -o -z "$CONFIRM" ] || exit 1
 }
-
-_ABASH=1
