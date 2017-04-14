@@ -8,7 +8,7 @@
 _ABASH=1
 
 usage() {
-  echo -e "\033[1musage\033[0m: $(basename $0) $@"
+  echo -e "\033[1musage\033[0m: $(basename $0) $@" >&2
   exit 1
 }
 
@@ -146,12 +146,12 @@ sigint() {
   trap _sigint SIGINT
 }
 
-isint() {
+is_int() {
   [ "$1" -eq "$1" ] &> /dev/null
 }
 
 pidpid() {
-  isint $1 && echo $1 || pidof -s $1 2> /dev/null
+  is_int $1 && echo $1 || pidof -s $1 2> /dev/null
 }
 
 confirm() {
