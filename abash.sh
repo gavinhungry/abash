@@ -21,7 +21,7 @@ arg() {
 
   local LONG=$(echo $1 | cut -d: -f1)
   local SHORT=$(echo $1 | cut -sd: -f2)
-  local DEFAULT=$2
+  local DEFAULT=${2:-}
 
   local LONG_ARG="--${LONG}"
   local SHORT_ARG="-${SHORT:-${LONG:0:1}}"
