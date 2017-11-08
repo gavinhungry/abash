@@ -116,12 +116,15 @@ warn() {
 
 banner() {
   local BANNER=$1; shift
-  _print 1 37 44 "$BANNER" " $*"
+  local ARGS="$*"
+
+  [ ${#*} -ge 1 ] && ARGS=" $ARGS"
+  _print 1 37 44 "$BANNER" "$ARGS"
 }
 
 bannerline() {
   local ARGS="$*"
-  banner "${ARGS}$(printf '%*s' $((${COLUMNS:-$(tput cols)} - ${#ARGS})) '')"
+  banner "\n${ARGS}$(printf '%*s' $((${COLUMNS:-$(tput cols)} - ${#ARGS})) '')"
 }
 
 die() {
