@@ -1,6 +1,6 @@
 #!/bin/bash
 #
-# abash: small functions for bash shell scripts
+# abash: Useful functions for bash shell scripts
 # https://github.com/gavinhungry/abash
 #
 
