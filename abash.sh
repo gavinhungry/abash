@@ -18,17 +18,15 @@ pref() {
 arg() {
   [ $# -ne 1 ] && [ $# -ne 2 ] && return
 
-  local LONG SHORT
-  LONG=$(echo "$1" | cut -d: -f1)
-  SHORT=$(echo "$1" | cut -sd: -f2)
-
+  local LONG=$(echo "$1" | cut -d: -f1)
+  local SHORT=$(echo "$1" | cut -sd: -f2 | head -c 1)
+  local SHORT_ARG="${SHORT:-${LONG:0:1}}"
   local DEFAULT=${2:-}
-  local LONG_ARG="--$LONG"
-  local SHORT_ARG="-${SHORT:-${LONG:0:1}}"
 
   for (( I=0; I<${BASH_ARGC:-0}; I++ )); do
-    if [ "${BASH_ARGV[$I]}" == "$LONG_ARG" ] ||
-       [ "${BASH_ARGV[$I]}" == "$SHORT_ARG" ]; then
+    if [ "${BASH_ARGV[$I]}" == "--$LONG" ] ||
+       ([[ "${BASH_ARGV[$I]}" =~ ^-[^-] ]] &&
+        [[ "${BASH_ARGV[$I]}" =~ ^-.*"$SHORT_ARG" ]]); then
       echo "${BASH_ARGV[$I-1]}"
       return 0
       break
