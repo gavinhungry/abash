@@ -57,18 +57,14 @@ fnfarg() {
 }
 
 tmpdirp() {
-  local TMP
-  TMP="${TMPDIR:-/tmp}/$(basename "$0")-$(whoami)/${1:-tmp}"
-
-  mkdir -p "$TMP"
+  local TMP="${TMPDIR:-/tmp}/$(basename "$0")-$(whoami)/${1:-tmp}"
+  mkdir -m 0700 -p "$TMP"
   echo "$TMP"
 }
 
 tmpdir() {
-  local TMP
-  TMP="${TMPDIR:-/tmp}/$(basename "$0")-$(whoami)-$$/${1:-tmp}-${RANDOM}"
-
-  mkdir -p "$TMP"
+  local TMP="${TMPDIR:-/tmp}/$(basename "$0")-$(whoami)-$$/${1:-tmp}-${RANDOM}"
+  mkdir -m 0700 -p "$TMP"
   echo "$TMP"
 }
 
