@@ -24,10 +24,10 @@ arg() {
   local DEFAULT=${2:-}
 
   for (( I=0; I<${BASH_ARGC:-0}; I++ )); do
-    if [ "${BASH_ARGV[$I]}" == "--$LONG" ] ||
+    if [ $(expr length "$LONG")  -ne 1 -a "${BASH_ARGV[$I]}" == "--$LONG" ] ||
        ([[ "${BASH_ARGV[$I]}" =~ ^-[^-] ]] &&
         [[ "${BASH_ARGV[$I]}" =~ ^-.*"$SHORT_ARG" ]]); then
-      echo "${BASH_ARGV[$I-1]}"
+      [ "${BASH_ARGV[$I-1]}" != "${BASH_ARGV[$I]}" ] && echo "${BASH_ARGV[$I-1]}"
       return 0
       break
     fi
