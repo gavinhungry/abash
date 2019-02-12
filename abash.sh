@@ -148,6 +148,10 @@ pidpid() {
   (isint "$1" && echo "$1") || pidof -s "$1" 2> /dev/null
 }
 
+running() {
+  pidof -o %PPID -x "$0" > /dev/null
+}
+
 confirm() {
   local CONFIRM
   read -rp "$* [Y/n] " CONFIRM
