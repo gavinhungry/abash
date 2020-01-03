@@ -5,6 +5,7 @@
 #
 
 export _ABASH=1
+[ -t 1 ] && _ABASH_IS_TTY=1 || _ABASH_IS_TTY=0
 
 usage() {
   echo -e "\033[1musage\033[0m: $(basename "$0") $*" >&2
@@ -56,6 +57,10 @@ fnfarg() {
   echo "${NFARGS[0]}"
 }
 
+istty() {
+  [ ${_ABASH_IS_TTY} -eq 1 ]
+}
+
 tmpdirp() {
   local TMP="${TMPDIR:-/tmp}/$(basename "$0")-$(whoami)/${1:-tmp}"
   mkdir -m 0700 -p "$TMP"
@@ -83,6 +88,30 @@ _print() {
   local BANNER=$1; shift
 
   echo -e "\e[${ATTR};${FG};${BG}m${BANNER}\e[0m$*"
+}
+
+color() {
+  ! istty && return
+
+  if [ "$1" == "end" ]; then
+    tput sgr0
+    return
+  fi
+
+  for ARG in "$@"; do
+    case $ARG in
+      black)          ARG='setaf 0' ;;
+      red)            ARG='setaf 1' ;;
+      green)          ARG='setaf 2' ;;
+      yellow)         ARG='setaf 3' ;;
+      blue)           ARG='setaf 4' ;;
+      magenta|purple) ARG='setaf 5' ;;
+      cyan|lightblue) ARG='setaf 6' ;;
+      white)          ARG='setaf 7' ;;
+    esac
+
+    tput $ARG
+  done
 }
 
 msg() {
