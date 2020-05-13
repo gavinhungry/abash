@@ -188,3 +188,14 @@ confirm() {
 
   [ "${CONFIRM,,}" == "y" ] || [ "${CONFIRM,,}" == "yes" ] || [ -z "$CONFIRM" ] || exit 1
 }
+
+includes() {
+  local -n ARR=$1
+  local VAL=$2
+
+  for V in "${ARR[@]}"; do
+    [ "$V" = "$VAL" ] && return 0
+  done
+
+  return 1
+}
