@@ -199,3 +199,7 @@ includes() {
 
   return 1
 }
+
+split() {
+  tr ${1:-,} '\n'
+}
