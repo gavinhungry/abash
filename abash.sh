@@ -181,6 +181,10 @@ running() {
   pidof -o %PPID -x "$0" > /dev/null
 }
 
+nwhich() {
+  which -a $1 | grep -v "^$(realpath $0)$" | head -n${2:-1} | tail -n1
+}
+
 confirm() {
   local CONFIRM
   read -rp "$* [Y/n] " CONFIRM
