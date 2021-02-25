@@ -7,6 +7,8 @@
 export _ABASH=1
 [ -t 1 ] && _ABASH_IS_TTY=1 || _ABASH_IS_TTY=0
 
+TMPDIR_BASE=${TMPDIR:-/tmp}
+
 usage() {
   echo -e "\033[1musage\033[0m: $(basename "$0") $*" >&2
   exit 1
@@ -62,19 +64,19 @@ istty() {
 }
 
 tmpdirp() {
-  local TMP="${TMPDIR:-/tmp}/$(basename "$0")-$(whoami)/${1:-tmp}"
+  local TMP="${TMPDIR_BASE}/$(basename "$0")-$(whoami)/${1:-tmp}"
   mkdir -m 0700 -p "$TMP"
   echo "$TMP"
 }
 
 tmpdir() {
-  local TMP="${TMPDIR:-/tmp}/$(basename "$0")-$(whoami)-$$/${1:-tmp}-${RANDOM}"
+  local TMP="${TMPDIR_BASE}/$(basename "$0")-$(whoami)-$$/${1:-tmp}-${RANDOM}"
   mkdir -m 0700 -p "$TMP"
   echo "$TMP"
 }
 
 tmpdirclean() {
-  rm -fr "${TMPDIR:-/tmp}/$(basename "$0")-$(whoami)"{,-$$}
+  rm -fr "${TMPDIR_BASE}/$(basename "$0")-$(whoami)"{,-$$}
 }
 
 quietly() {
