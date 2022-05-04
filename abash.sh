@@ -175,6 +175,26 @@ isint() {
   [ "$1" -eq "$1" ] &> /dev/null
 }
 
+piduser() {
+  ps -o uname= -p "$1"
+}
+
+pidofuser() {
+  PIDS=()
+
+  for PID in $(pidof $2); do
+    if [ "$(piduser $PID)" = "$1" ]; then
+      PIDS+=($PID)
+    fi
+  done
+
+  if [ ${#PIDS[@]} -eq 0 ]; then
+    return 1
+  fi
+
+  echo ${PIDS[@]};
+}
+
 pidpid() {
   (isint "$1" && echo "$1") || pidof -s "$1" 2> /dev/null
 }
