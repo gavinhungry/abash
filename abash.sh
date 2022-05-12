@@ -182,7 +182,7 @@ piduser() {
 pidofuser() {
   PIDS=()
 
-  for PID in $(pidof $2); do
+  for PID in $(pidof -x $2); do
     if [ "$(piduser $PID)" = "$1" ]; then
       PIDS+=($PID)
     fi
