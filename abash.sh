@@ -229,3 +229,10 @@ includes() {
 split() {
   tr ${1:-,} '\n'
 }
+
+xsleep() {
+  BASH_LOADABLES_PATH=$(pkg-config bash --variable=loadablesdir)
+  enable -f sleep sleep
+
+  sleep $1
+}
