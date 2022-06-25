@@ -144,13 +144,13 @@ banner() {
   local ARGS="$*"
 
   [ ${#*} -ge 1 ] && ARGS=" $ARGS"
-  _print 1 39 44 "$BANNER" "$ARGS"
+  _print 1 1 44 "$BANNER" "$ARGS"
 }
 
 bannerline() {
   [ "$1" == -f ] && shift && local PRE=
   local ARGS="$*"
-  banner "${PRE-\n}${ARGS}$(printf '%*s' $((${COLUMNS:-$(tput cols)} - ${#ARGS})) '')"
+  banner "${PRE-\n} ${ARGS}$(printf '%*s' $((${COLUMNS:-$(tput cols)} - 1 - ${#ARGS})) '')"
 }
 
 die() {
