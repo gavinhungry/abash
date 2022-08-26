@@ -200,7 +200,7 @@ pidpid() {
 }
 
 running() {
-  pidof -o %PPID -x "$0" > /dev/null
+  pidof -o %PPID -x "$1" > /dev/null
 }
 
 nwhich() {
