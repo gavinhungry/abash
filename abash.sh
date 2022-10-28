@@ -5,13 +5,21 @@
 #
 
 export _ABASH=1
-[ -t 1 ] && _ABASH_IS_TTY=1 || _ABASH_IS_TTY=0
 
 TMPDIR_BASE=${TMPDIR:-/tmp}
 
 usage() {
   echo -e "\033[1musage\033[0m: $(basename "$0") $*" >&2
   exit 1
+}
+
+console_file_path() {
+  local FILE_PATH=$1
+  if ! ispty && [ -f ${FILE_PATH}.console ]; then
+    FILE_PATH=${FILE_PATH}.console
+  fi
+
+  echo $FILE_PATH
 }
 
 pref() {
@@ -60,7 +68,11 @@ fnfarg() {
 }
 
 istty() {
-  [ ${_ABASH_IS_TTY} -eq 1 ]
+  [ -t 1 ]
+}
+
+ispty() {
+  [[ $(tty) = */pts/[0-9]* ]] && [ $TERM != 'linux' ]
 }
 
 tmpdirp() {
