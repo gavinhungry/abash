@@ -56,6 +56,10 @@ arge() {
   arg "$1" &> /dev/null
 }
 
+pfarg() {
+  arge $1 && echo "--$1"
+}
+
 nfargs() {
   for (( I=$((BASH_ARGC[0] - 1)); I>=0; I-- )); do
     [[ "${BASH_ARGV[$I]}" != -* ]] && echo "${BASH_ARGV[$I]}"
