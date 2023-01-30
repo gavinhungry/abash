@@ -252,3 +252,14 @@ xsleep() {
 
   sleep $1
 }
+
+fmpath() {
+  STR="$1"
+  shift
+  grep -l "^${STR}$" "$@" | head -n1
+}
+
+fmpathdir() {
+  FILE=$(fmpath "$@")
+  [ -n "$FILE" ] && dirname "$FILE"
+}
