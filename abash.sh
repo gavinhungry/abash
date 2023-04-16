@@ -75,6 +75,12 @@ istty() {
   [ -t 1 ]
 }
 
+istty && _ABASH_IS_TTY=1 || _ABASH_IS_TTY=0
+
+_istty() {
+  [ $_ABASH_IS_TTY == 1 ]
+}
+
 ispty() {
   [[ $(tty) = */pts/[0-9]* ]] && [ $TERM != 'linux' ]
 }
@@ -109,7 +115,7 @@ _print() {
 }
 
 color() {
-  ! istty && return
+  _istty || return
 
   if [ "$1" == "end" ]; then
     tput sgr0
