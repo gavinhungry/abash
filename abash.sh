@@ -269,3 +269,7 @@ fmpathdir() {
   FILE=$(fmpath "$@")
   [ -n "$FILE" ] && dirname "$FILE"
 }
+
+hr() {
+  printf "%0.s—" $(seq 1 $COLUMNS)
+}
