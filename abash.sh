@@ -273,3 +273,8 @@ fmpathdir() {
 hr() {
   printf "%0.s—" $(seq 1 $COLUMNS)
 }
+
+pause() {
+  read -rsn1 -p 'Press any key to continue...'
+  echo
+}
