@@ -278,3 +278,14 @@ pause() {
   read -rsn1 -p 'Press any key to continue...'
   echo
 }
+
+enpad() {
+  local STR=$1
+  local EN_SPACE=$(printf '\u2002')
+
+  while [ ${#STR} -lt $2 ]; do
+    STR+=$EN_SPACE
+  done
+
+  echo "$STR"
+}
