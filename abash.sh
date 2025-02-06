@@ -289,3 +289,7 @@ enpad() {
 
   echo "$STR"
 }
+
+njoin() {
+  sed ":a;N;\$!ba;s/\n/${1:- }/g"
+}
