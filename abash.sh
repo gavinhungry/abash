@@ -34,6 +34,7 @@ arg() {
   local SHORT_ARG="${SHORT:-${LONG:0:1}}"
   local DEFAULT=${2:-}
 
+  local I
   for (( I=0; I<${BASH_ARGC:-0}; I++ )); do
     if [ $(expr length "$LONG") -ne 1 -a "${BASH_ARGV[$I]}" == "--$LONG" ] ||
        ([[ "${BASH_ARGV[$I]}" =~ ^-[^-] ]] &&
