@@ -13,15 +13,6 @@ usage() {
   exit 1
 }
 
-console_file_path() {
-  local FILE_PATH=$1
-  if ! ispty && [ -f ${FILE_PATH}.console ]; then
-    FILE_PATH=${FILE_PATH}.console
-  fi
-
-  echo $FILE_PATH
-}
-
 pref() {
   [ "${!1:-0}" -eq 1 ] && return
 }
