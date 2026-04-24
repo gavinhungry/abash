@@ -240,6 +240,13 @@ includes() {
   return 1
 }
 
+includesw() {
+  local -n ARR=$1
+  local VAL=$2
+
+  echo "$VAL" | grep -qwE "$(IFS='|'; echo "${ARR[*]}")"
+}
+
 split() {
   tr ${1:-,} '\n'
 }
