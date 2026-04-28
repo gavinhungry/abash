@@ -270,7 +270,7 @@ fmpathdir() {
 }
 
 hr() {
-  printf "%0.s—" $(seq 1 $COLUMNS)
+  printf "\e[30m$(printf '%0.s—' $(seq 1 ${COLUMNS:-$(tput cols)}))\e[0m\n"
 }
 
 pause() {
