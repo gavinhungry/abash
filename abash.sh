@@ -63,6 +63,11 @@ fnfarg() {
   echo "${NFARGS[0]}"
 }
 
+cols() {
+  local COLS=${COLUMNS:-$(tput cols 2> /dev/null)}
+  echo "${COLS:-80}"
+}
+
 istty() {
   [ -t 1 ]
 }
@@ -164,7 +169,7 @@ banner() {
 bannerline() {
   [ "$1" == -f ] && shift && local PRE=
   local ARGS="$*"
-  banner "${PRE-\n} ${ARGS}$(printf '%*s' $((${COLUMNS:-$(tput cols)} - 1 - ${#ARGS})) '')"
+  banner "${PRE-\n} ${ARGS}$(printf '%*s' $(($(cols) - 1 - ${#ARGS})) '')"
 }
 
 die() {
@@ -270,7 +275,7 @@ fmpathdir() {
 }
 
 hr() {
-  printf "\e[30m$(printf '%0.s—' $(seq 1 ${COLUMNS:-$(tput cols)}))\e[0m\n"
+  printf "\e[30m$(printf '%0.s—' $(seq 1 $(cols)))\e[0m\n"
 }
 
 pause() {
