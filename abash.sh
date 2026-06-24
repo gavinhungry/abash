@@ -297,3 +297,7 @@ enpad() {
 njoin() {
   sed ":a;N;\$!ba;s/\n/${1:- }/g"
 }
+
+trim() {
+  sed 's/^[[:space:]]*//;s/[[:space:]]*$//'
+}
