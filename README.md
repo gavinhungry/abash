@@ -55,6 +55,7 @@ Functions
 | `pause`         | Wait for the user to press any key                                              |
 | `enpad`         | Pad a string to a given length with en-spaces                                   |
 | `njoin`         | Join lines into a single line with a delimiter                                  |
+| `trim`          | Trim leading and trailing whitespace from a string                              |
 
 License
 -------
