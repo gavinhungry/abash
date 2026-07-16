@@ -4,7 +4,7 @@
 # https://github.com/gavinhungry/abash
 #
 
-export _ABASH=1
+_ABASH=1
 
 TMPDIR_BASE=${TMPDIR:-/tmp}
 
