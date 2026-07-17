@@ -24,9 +24,6 @@ Functions
 | `cols`          | Get the number of columns in the terminal                                       |
 | `istty`         | Check if stdout is a TTY                                                        |
 | `ispty`         | Check if connected to a pseudo-terminal                                         |
-| `tmpdirp`       | Create a persistent temporary directory                                         |
-| `tmpdir`        | Create a unique temporary directory per invocation                              |
-| `tmpdirclean`   | Remove all temporary directories created by the script                          |
 | `quietly`       | Suppress command output unless `--verbose` is set                               |
 | `color`         | Set terminal color using tput                                                   |
 | `msg`           | Print a formatted message with the program name                                 |

@@ -6,8 +6,6 @@
 
 _ABASH=1
 
-TMPDIR_BASE=${TMPDIR:-/tmp}
-
 usage() {
   echo -e "\033[1musage\033[0m: $(basename "$0") $*" >&2
   exit 1
@@ -80,22 +78,6 @@ _istty() {
 
 ispty() {
   [[ $(tty) = */pts/[0-9]* ]] && [ $TERM != 'linux' ]
-}
-
-tmpdirp() {
-  local TMP="${TMPDIR_BASE}/$(basename "$0")-$(whoami)/${1:-tmp}"
-  mkdir -m 0700 -p "$TMP"
-  echo "$TMP"
-}
-
-tmpdir() {
-  local TMP="${TMPDIR_BASE}/$(basename "$0")-$(whoami)-$$/${1:-tmp}-${RANDOM}"
-  mkdir -m 0700 -p "$TMP"
-  echo "$TMP"
-}
-
-tmpdirclean() {
-  rm -fr "${TMPDIR_BASE}/$(basename "$0")-$(whoami)"{,-$$}
 }
 
 quietly() {
