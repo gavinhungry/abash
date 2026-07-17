@@ -4,6 +4,7 @@
 # https://github.com/gavinhungry/abash
 #
 
+[[ ${_ABASH:-} == 1 ]] && return
 _ABASH=1
 
 usage() {

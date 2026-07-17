@@ -6,7 +6,7 @@ Usage
 -----
 
 ```sh
-[ ${_ABASH:-0} -ne 0 ] || source $(dirname "${BASH_SOURCE[0]}")/abash/abash.sh
+source $(dirname "${BASH_SOURCE[0]}")/abash/abash.sh
 ```
 
 Functions
