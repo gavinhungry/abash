@@ -284,3 +284,7 @@ njoin() {
 trim() {
   sed 's/^[[:space:]]*//;s/[[:space:]]*$//'
 }
+
+singleinst() {
+  [ "$(pidof -x $0)" != "$$" ] && exit
+}
