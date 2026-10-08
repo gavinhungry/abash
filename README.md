@@ -54,6 +54,7 @@ Functions
 | `njoin`         | Join lines into a single line with a delimiter                                  |
 | `trim`          | Trim leading and trailing whitespace from a string                              |
 | `singleinst`    | Exit if another instance of the script is already running                       |
+| `wmname`        | Set the terminal window/tab title                                               |
 
 License
 -------
