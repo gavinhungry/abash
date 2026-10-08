@@ -288,3 +288,7 @@ trim() {
 singleinst() {
   [ "$(pidof -x $0)" != "$$" ] && exit
 }
+
+wmname() {
+  printf '\033]2;%s\007' "$*"
+}
