@@ -81,6 +81,10 @@ ispty() {
   [[ $(tty) = */pts/[0-9]* ]] && [ $TERM != 'linux' ]
 }
 
+nocolor() {
+  [ -n "$NO_COLOR" ]
+}
+
 quietly() {
   (arge verbose && eval "$*") || eval "$*" &> /dev/null
 }
@@ -95,7 +99,7 @@ _print() {
 }
 
 color() {
-  _istty || return
+  { _istty && ! nocolor; } || return
 
   if [ "$1" == "end" ]; then
     tput sgr0
