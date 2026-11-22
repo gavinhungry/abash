@@ -41,7 +41,7 @@ Functions
 | `pidpid`        | Resolve a process name to a PID                                                 |
 | `running`       | Check if a process is currently running                                         |
 | `nwhich`        | Find a program in PATH, excluding the current script                            |
-| `confirm`       | Prompt for yes/no confirmation                                                  |
+| `confirm`       | Prompt for yes/no confirmation (`-n` to default to no)                          |
 | `includes`      | Check if an array contains a value                                              |
 | `includesw`     | Check if a value matches any whole-word entry in an array                       |
 | `split`         | Split input by a delimiter into lines                                           |

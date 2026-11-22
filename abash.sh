@@ -214,11 +214,16 @@ nwhich() {
 }
 
 confirm() {
+  local DEFAULT=y
+  local PROMPT='[Y/n]'
+  [ "$1" = "-n" ] && shift && DEFAULT=n && PROMPT='[y/N]'
+
   local CONFIRM
-  read -rp "$* [Y/n] " CONFIRM
+  read -rp "$* $PROMPT " CONFIRM
   echo
 
-  [ "${CONFIRM,,}" == "y" ] || [ "${CONFIRM,,}" == "yes" ] || [ -z "$CONFIRM" ] || exit 1
+  CONFIRM=${CONFIRM:-$DEFAULT}
+  [ "${CONFIRM,,}" == "y" ] || [ "${CONFIRM,,}" == "yes" ] || exit 1
 }
 
 includes() {
