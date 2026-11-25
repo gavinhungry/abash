@@ -24,7 +24,11 @@ Functions
 | `cols`          | Get the number of columns in the terminal                                       |
 | `istty`         | Check if stdout is a TTY                                                        |
 | `ispty`         | Check if connected to a pseudo-terminal                                         |
+| `nocolor`       | Check if `NO_COLOR` is set                                                      |
 | `quietly`       | Suppress command output unless `--verbose` is set                               |
+| `tilde`         | Render a path as `~/...` relative to `$HOME`                                    |
+| `bold`          | Print text in bold, respecting `NO_COLOR`                                       |
+| `bpath`         | Print a path in bold with `~` substitution                                      |
 | `color`         | Set terminal color using tput                                                   |
 | `msg`           | Print a formatted message with the program name                                 |
 | `inform`        | Print a green informational message                                             |
