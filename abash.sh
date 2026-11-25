@@ -95,7 +95,29 @@ _print() {
   local BG=$1; shift
   local BANNER=$1; shift
 
-  echo -e "\e[${ATTR};${FG};${BG}m${BANNER}\e[0m$*"
+  if nocolor; then
+    printf '%s%s\n' "$BANNER" "$*"
+  else
+    printf '\e[%s;%s;%sm%s\e[0m%s\n' "$ATTR" "$FG" "$BG" "$BANNER" "$*"
+  fi
+}
+
+tilde() {
+  local P=$1
+  [[ "$P" == "$HOME" || "$P" == "$HOME"/* ]] && P="~${P#"$HOME"}"
+  printf '%s' "$P"
+}
+
+bold() {
+  if nocolor; then
+    printf '%s' "$*"
+  else
+    printf '\e[1m%s\e[22m' "$*"
+  fi
+}
+
+bpath() {
+  bold "$(tilde "$1")"
 }
 
 color() {
@@ -156,7 +178,7 @@ banner() {
 bannerline() {
   [ "$1" == -f ] && shift && local PRE=
   local ARGS="$*"
-  banner "${PRE-\n} ${ARGS}$(printf '%*s' $(($(cols) - 1 - ${#ARGS})) '')"
+  banner "${PRE-$'\n'} ${ARGS}$(printf '%*s' $(($(cols) - 1 - ${#ARGS})) '')"
 }
 
 die() {
@@ -220,7 +242,6 @@ confirm() {
 
   local CONFIRM
   read -rp "$* $PROMPT " CONFIRM
-  echo
 
   CONFIRM=${CONFIRM:-$DEFAULT}
   [ "${CONFIRM,,}" == "y" ] || [ "${CONFIRM,,}" == "yes" ] || exit 1
